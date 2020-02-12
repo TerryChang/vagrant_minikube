@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: whoami
+spec:
+  selector:
+    matchLabels:
+      type: app
+      service: whoami
+  template:
+    metadata:
+      labels:
+        type: app
+        service: whoami
+    spec:
+      containers:
+      - name: whoami
+        image: subicura/whoami-redis:1
+        env:
+        - name: REDIS_HOST
+          value: "redis"
+        - name: REDIS_PORT
+          value: "6379"
